@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, scoreStore;
 
 init();
 
@@ -18,6 +18,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     if(gamePlaying) {
         // 1. Random number
         var dice = Math.floor(Math.random() * 6) + 1;
+        scoreStore.push(dice)
 
         //2. Display the result
         var diceDOM = document.querySelector('.dice');
@@ -26,7 +27,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 
         //3. Update the round score IF the rolled number was NOT a 1
-        if (dice !== 1) {
+        if (dice !== 1 || scoreStore[scoreStore.length] === scoreStore[scoreStore.length - 1]) {
             //Add score
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
